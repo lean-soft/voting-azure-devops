@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  vote:
+    image: harbor-bj.devopshub.cn/docker-training/vote:latest
+    ports:
+      - "5000:80"
+    networks:
+      - front-tier
+      - back-tier
+
+  result:
+    image: harbor-bj.devopshub.cn/docker-training/result:latest
+    ports:
+      - "5001:80"
+      - "5858:5858"
+    networks:
+      - front-tier
+      - back-tier
+
+  worker:
+    image: harbor-bj.devopshub.cn/docker-training/worker:latest
+    networks:
+      - back-tier
+
+  redis:
+    image: harbor-bj.devopshub.cn/docker-training/redis:alpine
+    container_name: redis
+    ports: ["6379"]
+    networks:
+      - back-tier
+
+  db:
+    image: harbor-bj.devopshub.cn/docker-training/postgres:9.4
+    container_name: db
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+    networks:
+      - back-tier
+
+volumes:
+  db-data:
+
+networks:
+  front-tier:
+  back-tier:
