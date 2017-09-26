@@ -1,0 +1,45 @@
+version: '2'
+
+services:
+  gitlab:
+    image: 'harbor-bj.devopshub.cn/docker-training/gitlab-ce:latest'
+    restart: always
+    hostname: 'gitlab'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://23.97.73.190'
+    ports:
+      - '80:80'
+      - '443:443'
+      - '822:22'
+    volumes:
+      - $PWD/gitlab/config:/etc/gitlab
+      - $PWD/gitlab/logs:/var/log/gitlab'
+      - $PWD/gitlab/data:/var/opt/gitlab'
+
+  jenkins:
+    image: harbor-bj.devopshub.cn/docker-training/jenkins:dt
+    restart: always
+    ports:
+      - "81:8080"
+      - "50000:50000/udp"
+    volumes:
+      - /home/azureuser/.ssh/:/var/jenkins_home/demokey/
+  registry:
+    image: harbor-bj.devopshub.cn/docker-training/registry:latest
+    restart: always
+    ports:
+      - "82:5000"
+    volumes:
+      - $PWD/registry/data:/var/lib/registry
+
+  cadvisor:
+    image: harbor-bj.devopshub.cn/docker-training/cadvisor:latest
+    restart: always
+    ports:
+      - "83:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro

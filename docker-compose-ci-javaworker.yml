@@ -1,0 +1,8 @@
+version: '2'
+services:
+  ci-build:
+    image: harbor-bj.devopshub.cn/docker-training/maven:3.3.9-jdk-8
+    volumes:
+      - ./worker/:/src
+    working_dir: /src
+    command: /bin/bash -c "mvn package"

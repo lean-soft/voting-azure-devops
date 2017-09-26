@@ -1,0 +1,8 @@
+version: '2'
+services:
+  ci-build:
+    image: harbor-bj.devopshub.cn/docker-training/dotnet:1.0.0-preview2-sdk
+    volumes:
+      - ./worker/src:/src
+    working_dir: /src
+    command: /bin/bash -c "dotnet restore -v minimal && dotnet publish -c Release -o ./ ./Worker/"
