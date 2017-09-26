@@ -2,7 +2,7 @@ version: "3"
 services:
 
     redis:
-        image: operation:82/redis:alpine
+        image: harbor-bj.devopshub.cn/docker-training/redis:alpine
         ports:
             - "6379"
         networks:
@@ -15,7 +15,7 @@ services:
             restart_policy:
                 condition: on-failure
     db:
-        image: operation:82/postgres:9.4
+        image: harbor-bj.devopshub.cn/docker-training/postgres:9.4
         volumes:
             - db-data:/var/lib/postgresql/data
         networks:
@@ -24,7 +24,7 @@ services:
             placement:
                 constraints: [node.role == manager]
     vote:
-        image: operation:82/vote:latest
+        image: {acr-address}/vote:latest
         ports:
             - 5000:80
         networks:
@@ -38,7 +38,7 @@ services:
             restart_policy:
                 condition: on-failure
     result:
-        image: operation:82/result:latest
+        image: {acr-address}/result:latest
         ports:
             - 5001:80
         networks:
@@ -54,7 +54,7 @@ services:
                 condition: on-failure
 
     worker:
-        image: operation:82/worker:latest
+        image: {acr-address}/worker:latest
         networks:
             - frontend
             - backend
