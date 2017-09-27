@@ -24,14 +24,14 @@ services:
       - back-tier
 
   redis:
-    image: harbor-bj.devopshub.cn/docker-training/redis:alpine
+    image: {acr-address}/redis:alpine
     container_name: redis
     ports: ["6379"]
     networks:
       - back-tier
 
   db:
-    image: harbor-bj.devopshub.cn/docker-training/postgres:9.4
+    image: {acr-address}/postgres:9.4
     container_name: db
     volumes:
       - "db-data:/var/lib/postgresql/data"
