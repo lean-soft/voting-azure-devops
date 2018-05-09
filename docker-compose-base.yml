@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  vote:
+    image: voting/vote
+    build:
+      context: ./vote
+      dockerfile: Dockerfile
+  result:
+    image: voting/result
+    build:
+      context: ./result
+      dockerfile: Dockerfile
+  worker:
+    image: voting/worker
+    build:
+      context: ./worker
+      dockerfile: Dockerfile
+  redis:
+    image: harbor-bj.devopshub.cn/docker-training/redis:alpine
+  db:
+    image: harbor-bj.devopshub.cn/docker-training/postgres:9.4
