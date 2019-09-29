@@ -1,4 +1,4 @@
-FROM harbor-bj.devopshub.cn/docker-training/node:5.11.0-slim
+FROM node:5.11.0-slim
 
 WORKDIR /app
 
