@@ -1,5 +1,5 @@
 # Using official python runtime base image
-FROM harbor-bj.devopshub.cn/docker-training/python:2.7-alpine
+FROM python:2.7-alpine
 
 # Set the application directory
 WORKDIR /app
