@@ -1,4 +1,4 @@
-FROM harbor-bj.devopshub.cn/docker-training/dotnet:1.0.0-preview2-sdk
+FROM microsoft/dotnet:1.0.0-preview2-sdk
 
 WORKDIR /code
 
